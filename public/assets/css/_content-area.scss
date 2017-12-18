@@ -1,0 +1,119 @@
+/// Takes care of the general content area on the side of the dashboard /// 
+#content-area {
+    margin-left: 310px;
+    padding: 15px;
+    color: white;
+    text-transform: uppercase;
+    };
+    .svg-inline--fa{
+        margin-right: 0.8rem;
+        display: inline-block;
+        position: relative;
+      }
+.header{
+    h1{
+        color: white;
+        font-size: 30px;
+        padding-top: 90px;
+        margin-bottom: 10px;
+        
+        .thinHeader{
+        font-weight: 200;
+        margin-bottom: 10px;
+        }
+    }
+}
+/// Takes care of the survey on the User Page and Progress Page  ///
+.container.fitness-survey{
+    background: #ad0606;;
+    margin-top: 92px;
+    margin-left: 30%;
+    width: 450px;
+    border-radius: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    
+}
+.container.weight-survey{
+    background: #ad0606;;
+    margin-top: 92px;
+    margin-left: 140px;
+    width: 820px;
+    border-radius: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    
+}
+input::placeholder {
+    
+    color: white
+}
+input[type=text], select {
+    width: 95%;
+    padding: 12px 20px;
+    margin: 8px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-width:0px;
+    background: transparent;
+    border-top: transparent !important;
+    border-left: transparent !important;
+    border-right: transparent !important;
+    border-bottom: transparent !important;
+    color: white;
+    padding-left: 0;
+    text-transform: uppercase;
+    font-size: 20px;
+    
+}
+input[type=submit] {
+    width: 100%;
+    background-color:  #830707;
+    color: #ffffff;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    font-size: 20px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    &:hover{
+        background: #830707;
+        box-shadow: 0 0 px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
+        
+       }
+}
+
+
+/// Takes care of the workout table ///
+    table{
+        width: 85%;
+        color: white;
+        margin-top: 92px;
+        margin-left: 80px;
+        border-collapse: collapse;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        
+}
+#workoutTable td, #workoutTable th {
+padding: 10px;
+
+}
+#workoutTable tr:nth-child(even){
+    background-color: #ad0606;;
+}
+#workoutTable tr:nth-child(odd){
+    background-color: #830707;
+}
+#workoutTable th {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: left;
+    background-color: #830707;
+    color: white;
+    font-size: 20px;
+}
+    /// Takes care of the charts and inputs on the progress page ///

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <title>Fitness App Dashboard</title>
+</head>
+
+<body>
+    <section id="sideMenu">
+        <img src="assets/images/1mrlogo.svg" id="logoNavBar" alt="Logo">
+        <nav>
+            <a href="dashboardClientSurvey.html">
+                <i class="fas fa-user"></i> User </a>
+            <a href="dashboardWorkout-Log.html">
+                <i class="fas fa-book"></i> Workout Log </a>
+            <a href="#" class="active">
+                <i class="fas fa-chart-line"></i> Progress </a>
+        </nav>
+    </section>
+
+    <section id="content-area">
+        <div class="header">
+            <h1>
+                <i class="fas fa-chart-line"></i> Progress
+            </h1>
+            <p>Keep track of your progress below</p>
+        </div>
+        <div class="container weight-survey">
+
+            <input type="text" name="Enter your week 1 weight" id="week-1-weight" class="form-control" placeholder="Week 1 Weight" required>
+            <input type="text" name="Enter your week 2 weight" id="week-2-weight" class="form-control" placeholder="Week 2 Weight" required>
+            <input type="text" name="Enter your week 3 weight" id="week-3-weight" class="form-control" placeholder="Week 3 Weight" required>
+            <input type="text" name="Enter your week 4 weight" id="week-4-weight" class="form-control" placeholder="Week 4 Weight" required>
+            <input type="text" name="Enter your week 5 weight" id="week-5-weight" class="form-control" placeholder="Week 5 Weight" required>
+            <input type="text" name="Enter your week 6 weight" id="week-6-weight" class="form-control" placeholder="Week 6 Weight" required>
+            <input type="submit" id="submit" data-toggle="modal" data-target="#myModal" value="Submit">
+        </div>
+
+        <br>
+        <br>
+        <br>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <canvas id="weightChart" height="200"></canvas>
+            </div>
+
+            <br>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <canvas id="benchChart" height="200"></canvas>
+                </div>
+            </div>
+
+        </div>
+    
+</body>
+
+
+<script>
+    // Capture the form inputs 
+    $("#submit").on("click", function () {
+
+        // Form validation
+        function validateForm() {
+            var isValid = true;
+            $('.form-control').each(function () {
+                if ($(this).val() === '')
+                    isValid = false;
+            });
+
+            return isValid;
+        }
+
+        // If all required fields are filled
+        if (validateForm() == true) {
+            // Create an object for the user's data
+            var userData = {
+                weight: JSON.stringify([$("#week-1-weight").val(), $("#week-2-weight").val(), $("#week-3-weight").val(), $("#week-4-weight").val(), $("#week-5-weight").val(), $("#week-6-weight").val()])
+            }
+
+            console.log(userData);
+
+            // // Grab the URL of the website
+            // var currentURL = window.location.origin;
+
+            // AJAX post the data to the friends API. 
+            $.post("/api/weightSurvey", userData, function () {
+                // change userData back into code
+                var parsedWeightArr = JSON.parse(userData.weight);
+                // go through the array that we made and change its content into integers, then save to a variable
+                // it currently looks like ['1', '2', '3']
+                var dataToBePassedToChart = parsedWeightArr.map(JSON.parse);
+                // now it should look like this [1, 2, 3]
+                console.log("nigga we made it ", dataToBePassedToChart);
+
+
+                var ctx = $("#weightChart");
+                var weightChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6"],
+                        datasets: [{
+                            label: 'Weight Fluctuation',
+                            data: dataToBePassedToChart,
+                            backgroundColor: "red",
+                            borderColor: "red",
+                            fill: false,
+                            borderWidth: 1
+                        }]
+
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: false
+                                }
+                            }]
+                        }
+                    }
+                });
+
+                var ctx = $("#benchChart");
+                var benchChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ["Untrained", "Novice", "Intermediate", "Advanced", "Elite"],
+                        datasets: [{
+                            label: 'Bench Press Standards at 165 lbs',
+                            data: [120, 150, 185, 255, 320],
+                            backgroundColor: "red",
+                            borderColor: "red",
+                            fill: false,
+                            borderWidth: 1
+                        }, {
+                            label: 'User Data',
+                            data: [75, 135, 205, 315, 295],
+                            backgroundColor: "white",
+                            borderColor: "white",
+                            fill: false,
+                            borderWidth: 1
+                        }]
+
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: false
+                                }
+                            }]
+                        }
+                    }
+                });
+                // if success then show user feedback that it was successful
+                // if (data.res == true) {
+                //     alert("Your weight changes have been successfully saved!");
+                // } else {
+                //     alert("You suck");
+                //     window.location.assign('/progress');
+                // }
+
+            });
+        }
+    });
+
+    // var ctx = $("#weightChart");
+    // var weightChart = new Chart(ctx, {
+    //     type: 'line',
+    //     data: {
+    //         labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6"],
+    //         datasets: [{
+    //             label: 'Weight Fluctuation',
+    //             data: [160, 155, 163, 165, 162, 166],
+    //             backgroundColor: "red",
+    //             borderColor: "red",
+    //             fill: false,
+    //             borderWidth: 1
+    //         }]
+
+    //     },
+    //     options: {
+    //         maintainAspectRatio: false,
+    //         scales: {
+    //             yAxes: [{
+    //                 ticks: {
+    //                     beginAtZero: false
+    //                 }
+    //             }]
+    //         }
+    //     }
+    // });
+
+    // var ctx = $("#benchChart");
+    // var benchChart = new Chart(ctx, {
+    //     type: 'line',
+    //     data: {
+    //         labels: ["Untrained", "Novice", "Intermediate", "Advanced", "Elite"],
+    //         datasets: [{
+    //             label: 'Bench Press Standards at 165 lbs',
+    //             data: [120, 150, 185, 255, 320],
+    //             backgroundColor: "red",
+    //             borderColor: "red",
+    //             fill: false,
+    //             borderWidth: 1
+    //         }, {
+    //             label: 'User Data',
+    //             data: [95, 135, 205, 315, 295],
+    //             backgroundColor: "blue",
+    //             borderColor: "blue",
+    //             fill: false,
+    //             borderWidth: 1
+    //         }]
+
+    //     },
+    //     options: {
+    //         maintainAspectRatio: false,
+    //         scales: {
+    //             yAxes: [{
+    //                 ticks: {
+    //                     beginAtZero: false
+    //                 }
+    //             }]
+    //         }
+    //     }
+    // });
+
+</script>
+
+</html>

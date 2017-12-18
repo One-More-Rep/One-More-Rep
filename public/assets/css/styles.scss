@@ -1,0 +1,150 @@
+@import "content-area";
+
+$grey : #222122;
+$red: #ad0606;
+$redSelected: #830707;
+
+/// DEFAULTS ACROSS WEBSITE ///
+
+*{
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: 'Ubuntu';
+  background: $grey;
+
+}
+
+/// DASHBOARD /// 
+
+#sideMenu {
+  background: $red;
+  width: 280px;
+  position: absolute;
+  top: 0;
+  bottom: -500px; 
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
+  #logoNavBar{
+    padding-top: 50px;
+  }
+
+  nav{
+    padding-top: 90px;
+
+    a{
+      display: block;
+      color: white;
+      text-decoration: none;
+      text-transform: uppercase;
+      padding: 20px 30px;
+      font-weight: 300;
+      transition: all 0.3s ease-in-out;
+      
+      &:hover{
+       background: $redSelected;
+       border-left: 5px solid white;
+       padding: 20px 30px 20px 25px;
+       box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+      }
+
+      .svg-inline--fa{
+        font-size: 1.4rem;
+        margin-right: 0.8rem;
+        display: inline-block;
+        width: 30px;
+        position: relative;
+        top: 2px;
+      }
+
+      &.active{
+        background: $redSelected;
+        border-left: 5px solid white;
+        padding: 20px 30px 20px 25px;
+        font-weight: 500;
+        box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+      }
+    }
+  }
+
+}
+
+// LOG IN PAGE // 
+
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+
+input.username {
+  font-family: 'Ubuntu';
+  color: white;
+  outline: 0;
+  background: $red;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+input.password {
+  font-family: 'Ubuntu';
+  color: white;
+  outline: 0;
+  background: $red;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.login-form {
+  position: relative;
+  color: #ffffff;
+  font-size: 20px;
+  text-transform: uppercase;
+  z-index: 1;
+  background: $red;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+ 
+//   button.login {
+//   color: #ffffff;
+//   text-transform: uppercase;
+//   outline: 0;
+//   background: $redSelected;
+//   width: 100%;
+//   border: 0;
+//   padding: 15px;
+//   font-size: 14px;
+//   -webkit-transition: all 0.3 ease;
+//   transition: all 0.3 ease;
+//   cursor: pointer;
+//   }
+// }
+
+// .form button.login:hover,.form button:active,.form button:focus {
+//   background:$redSelected;
+// }
+
+// .form .message {
+//   margin: 15px 0 0;
+//   color: #ffffff;
+//   font-size: 12px;
+// }
+// //   a {
+// //   color: rgb(255, 255, 255);
+// //   text-decoration: none;
+// //   } 
+// // }
