@@ -1,4 +1,4 @@
-var db = require("../models");
+const db = require("../models");
 
 module.exports = function (app) {
 
@@ -20,8 +20,7 @@ module.exports = function (app) {
   });
 
     app.post("/api/weightSurvey", function (req, res) {
-        console.log("HELLOOOO");
-        var weightData = req.body;
+        let weightData = req.body;
         console.log(weightData);
         console.log("i am the db ", db.Weight);
         // what does this line do? using sequelize to create new entry to the table(model)

@@ -74,7 +74,7 @@
 
         // Form validation
         function validateForm() {
-            var isValid = true;
+            let isValid = true;
             $('.form-control').each(function () {
                 if ($(this).val() === '')
                     isValid = false;
@@ -86,7 +86,7 @@
         // If all required fields are filled
         if (validateForm() == true) {
             // Create an object for the user's data
-            var userData = {
+            const userData = {
                 weight: JSON.stringify([$("#week-1-weight").val(), $("#week-2-weight").val(), $("#week-3-weight").val(), $("#week-4-weight").val(), $("#week-5-weight").val(), $("#week-6-weight").val()])
             }
 
@@ -98,16 +98,16 @@
             // AJAX post the data to the friends API. 
             $.post("/api/weightSurvey", userData, function () {
                 // change userData back into code
-                var parsedWeightArr = JSON.parse(userData.weight);
+                const parsedWeightArr = JSON.parse(userData.weight);
                 // go through the array that we made and change its content into integers, then save to a variable
                 // it currently looks like ['1', '2', '3']
-                var dataToBePassedToChart = parsedWeightArr.map(JSON.parse);
+                const dataToBePassedToChart = parsedWeightArr.map(JSON.parse);
                 // now it should look like this [1, 2, 3]
-                console.log("nigga we made it ", dataToBePassedToChart);
+                console.log(dataToBePassedToChart);
 
 
-                var ctx = $("#weightChart");
-                var weightChart = new Chart(ctx, {
+                let ctx = $("#weightChart");
+                const weightChart = new Chart(ctx, {
                     type: 'line',
                     data: {
                         labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6"],
@@ -133,8 +133,8 @@
                     }
                 });
 
-                var ctx = $("#benchChart");
-                var benchChart = new Chart(ctx, {
+                let ctx = $("#benchChart");
+                const benchChart = new Chart(ctx, {
                     type: 'line',
                     data: {
                         labels: ["Untrained", "Novice", "Intermediate", "Advanced", "Elite"],

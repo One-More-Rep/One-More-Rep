@@ -1,7 +1,7 @@
 {
     "development": {
       "username": "root",
-      "password": "PASSWORDHERE",
+      "password": "ENTERPASSWORD",
       "database": "weight_db",
       "host": "127.0.0.1",
       "dialect": "mysql"
